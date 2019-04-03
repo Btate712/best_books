@@ -6,7 +6,7 @@ class BestBooks::CLI
 
     puts "100 Best Books according to https://thegreatestbooks.org/..."
 
-    while !finished
+    until finished
       display_books
       book_choice = get_user_choice
       display_description(book_choice)

@@ -1,6 +1,6 @@
 # BestBooks
 
-This gem displays the top 50 books listed on thegreatestbooks.org and allows the
+This gem displays the top 10 books listed on thegreatestbooks.org and allows the
 user to choose a book to view it's description.
 
 ## Installation
