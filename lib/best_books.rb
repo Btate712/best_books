@@ -1,6 +1,6 @@
-require "best_books/version"
+require_relative "./best_books/version"
+require_relative "./best_books/CLI"
 
 module BestBooks
-  class Error < StandardError; end
-  # Your code goes here...
+
 end
