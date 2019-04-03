@@ -5,7 +5,3 @@ require_relative "./best_books/scraper"
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
-
-module BestBooks
-
-end
