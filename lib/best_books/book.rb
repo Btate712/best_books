@@ -15,8 +15,6 @@ class BestBooks::Book
   end
 
   def self.populate_library
-    20.times do |book|
-      self.new("Book Number #{book}", "Author Number #{book}")
-    end
+    BestBooks::Scraper.new
   end
 end

@@ -1,17 +1,39 @@
 # CLI Controller
 class BestBooks::CLI
   def call
+    finished = false
+    BestBooks::Book.populate_library
+
     puts "100 Best Books according to https://thegreatestbooks.org/..."
 
-    BestBooks::Book.populate_library
-    display_books
+    while !finished
+      display_books
+      book_choice = get_user_choice
+      display_description(book_choice)
+      finished = finished?
+    end
 
   end
 
   def display_books
-    20.times do |book|
+    10.times do |book|
       puts "#{book + 1}: #{BestBooks::Book.library[book].title}, by #{BestBooks::Book.library[book].author}"
     end
   end
 
+  def display_description(book_choice)
+    puts "#{BestBooks::Book.library[book_choice].title}, by #{BestBooks::Book.library[book_choice].author}"
+    puts BestBooks::Book.library[book_choice].description
+  end
+
+  def get_user_choice
+    puts "Which book would you like more information on?"
+    gets.strip.to_i - 1
+  end
+
+  def finished?
+    puts "Would you like to look at other books? (y/n)"
+    response = gets.strip.downcase
+    response == "y" ? false : true
+  end
 end
