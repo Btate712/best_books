@@ -10,6 +10,7 @@ class BestBooks::CLI
       display_books
       book_choice = get_user_choice
       display_description(book_choice)
+      offer_more(book_choice)
       finished = finished?
     end
 
@@ -35,5 +36,13 @@ class BestBooks::CLI
     puts "Would you like to look at other books? (y/n)"
     response = gets.strip.downcase
     response == "y" ? false : true
+  end
+
+  def offer_more(book_choice)
+    puts "Want more info? (y/n)"
+    input = gets.strip.downcase
+    if input == "y"
+      BestBooks::Book.library[book_choice].show_wikipedia_summary
+    end
   end
 end
