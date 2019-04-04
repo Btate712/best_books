@@ -19,6 +19,6 @@ class BestBooks::Book
   end
 
   def show_wikipedia_summary
-    puts BestBooks::Scraper.google_scrape(title.split.join('+'))
+    puts BestBooks::Scraper.google_scrape(self)
   end
 end

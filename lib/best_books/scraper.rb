@@ -10,11 +10,10 @@ class BestBooks::Scraper
     end
   end
 
-  def self.google_scrape(search_string)
+  def self.google_scrape(book)
+    search_string = book.title.split.join('+')
     google_search = open("https://www.google.com/search?q=wikipedia+#{search_string}")
     google_page = Nokogiri::HTML(google_search).css("cite")[0].text
-    wikipedia_page = Nokogiri::HTML(open(google_page))
-    doc = wikipedia_page
-    doc.css('p')[1].text
+    wikipedia_page = Nokogiri::HTML(open(google_page)).css('p')[1].text
   end
 end
