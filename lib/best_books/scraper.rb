@@ -14,7 +14,7 @@ class BestBooks::Scraper
     search_string = book.title.split.join('+')
     google_search = open("https://www.google.com/search?q=wikipedia+#{search_string}")
     google_page = Nokogiri::HTML(google_search)
-    google_page = google_page.css("cite")[0].text
-    Nokogiri::HTML(open(google_page)).css('p')[1].text
+    google_url = google_page.css("cite")[0].text
+    Nokogiri::HTML(open(url)).css('p')[1].text
   end
 end
