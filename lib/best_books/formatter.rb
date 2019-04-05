@@ -1,11 +1,7 @@
 class BestBooks::Formatter
-  def initialize(text)
-    @text = text
-  end
-
   # displays @text in paragraph format with a max width equal to the variable width
-  def display(width)
-    text_array = @text.split
+  def self.display(text, width)
+    text_array = text.split
     line_space_left = width
     text_array.each do |word|
       if word.length < line_space_left

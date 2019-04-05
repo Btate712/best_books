@@ -25,8 +25,7 @@ class BestBooks::CLI
   def display_description(book_choice)
     puts "#{BestBooks::Book.library[book_choice].title}, by #{BestBooks::Book.library[book_choice].author}"
     summary = BestBooks::Book.library[book_choice].description
-    formatter = BestBooks::Formatter.new(summary)
-    formatter.display(PAGE_WIDTH)
+    BestBooks::Formatter.display(summary, PAGE_WIDTH)
   end
 
   def get_user_choice

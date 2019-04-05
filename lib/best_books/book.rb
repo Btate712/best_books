@@ -1,5 +1,5 @@
 class BestBooks::Book
-  attr_accessor :title, :author, :description
+  attr_reader :title, :author, :description
 
   @@library = []
 
@@ -20,7 +20,6 @@ class BestBooks::Book
 
   def show_wikipedia_summary
     summary = BestBooks::Scraper.wiki(self)
-    formatter = BestBooks::Formatter.new(summary)
-    formatter.display(PAGE_WIDTH)
+    BestBooks::Formatter.display(summary, PAGE_WIDTH)
   end
 end
