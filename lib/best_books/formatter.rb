@@ -3,6 +3,7 @@ class BestBooks::Formatter
     @text = text
   end
 
+  # displays @text in paragraph format with a max width equal to the variable width
   def display(width)
     text_array = @text.split
     line_space_left = width
