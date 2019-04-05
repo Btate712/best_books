@@ -17,14 +17,16 @@ class BestBooks::CLI
   end
 
   def display_books
-    10.times do |book|
+    NUMBER_OF_BOOKS.times do |book|
       puts "#{book + 1}: #{BestBooks::Book.library[book].title}, by #{BestBooks::Book.library[book].author}"
     end
   end
 
   def display_description(book_choice)
     puts "#{BestBooks::Book.library[book_choice].title}, by #{BestBooks::Book.library[book_choice].author}"
-    puts BestBooks::Book.library[book_choice].description
+    summary = BestBooks::Book.library[book_choice].description
+    formatter = BestBooks::Formatter.new(summary)
+    formatter.display(PAGE_WIDTH)
   end
 
   def get_user_choice

@@ -19,6 +19,8 @@ class BestBooks::Book
   end
 
   def show_wikipedia_summary
-    puts BestBooks::Scraper.google_scrape(self)
+    summary = BestBooks::Scraper.google_scrape(self)
+    formatter = BestBooks::Formatter.new(summary)
+    formatter.display(PAGE_WIDTH)
   end
 end
