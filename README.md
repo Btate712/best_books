@@ -1,7 +1,12 @@
 # BestBooks
 
 This gem displays the top 10 books listed on thegreatestbooks.org and allows the
-user to choose a book to view it's description.
+user to choose a book to view it's description.  The user is then asked if they
+would like additional information on the book.  If the user answers yes, the
+"wiki" function does a google search for "wikipedia" plus the book's title to
+find the wikipedia page about the book and then scrapes the first paragraph from
+the wikipedia page.  Paragraph output is formatted to a max width equal to the
+constant PAGE_WIDTH.
 
 ## Installation
 
