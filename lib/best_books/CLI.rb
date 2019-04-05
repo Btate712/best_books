@@ -10,21 +10,26 @@ class BestBooks::CLI
       display_books
       book_choice = get_user_choice
       display_description(book_choice)
-      offer_more(book_choice)
+      offer_more_info(book_choice)
       finished = finished?
     end
-
+    goodbye
   end
 
   def display_books
     NUMBER_OF_BOOKS.times do |book|
-      puts "#{book + 1}: #{BestBooks::Book.library[book].title}, by #{BestBooks::Book.library[book].author}"
+      book_title = BestBooks::Book.library[book].title
+      book_author = BestBooks::Book.library[book].author
+      puts "#{book + 1}: #{book_title}, by #{book_author}"
     end
   end
 
   def display_description(book_choice)
-    puts "#{BestBooks::Book.library[book_choice].title}, by #{BestBooks::Book.library[book_choice].author}"
+    book_title = BestBooks::Book.library[book_choice].title
+    book_author = BestBooks::Book.library[book_choice].author
     summary = BestBooks::Book.library[book_choice].description
+
+    puts "#{book_title}, by #{book_author}"
     BestBooks::Formatter.display(summary, PAGE_WIDTH)
   end
 
@@ -39,11 +44,15 @@ class BestBooks::CLI
     response == "y" ? false : true
   end
 
-  def offer_more(book_choice)
+  def offer_more_info(book_choice)
     puts "Want more info? (y/n)"
     input = gets.strip.downcase
     if input == "y"
       BestBooks::Book.library[book_choice].show_wikipedia_summary
     end
+  end
+
+  def goodbye
+    puts "Thank you for your patronage!"
   end
 end
