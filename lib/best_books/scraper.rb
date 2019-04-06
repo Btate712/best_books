@@ -19,6 +19,8 @@ class BestBooks::Scraper
     if output_text.strip != ""
       output_text
     else
+      # This is a uniqe case needed for the Hamlet Wikipedia page, which
+      # has slightly different formatting than the other pages.
       Nokogiri::HTML(open(google_url)).css('p')[2].text
     end
   end
