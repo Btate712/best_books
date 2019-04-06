@@ -15,10 +15,10 @@ class BestBooks::Book
   end
 
   def self.populate_library
-    BestBooks::Scraper.new.scrape_books
+    BestBooks::Scraper.scrape_books
   end
 
   def wikipedia_summary
-    @summary ||= BestBooks::Scraper.new.wiki(self)
+    @summary ||= BestBooks::Scraper.wiki(self)
   end
 end

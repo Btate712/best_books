@@ -1,5 +1,5 @@
 class BestBooks::Scraper
-  def scrape_books
+  def self.scrape_books
     html = open('https://thegreatestbooks.org/')
     doc = Nokogiri::HTML(html)
     NUMBER_OF_BOOKS.times do |book|
@@ -10,7 +10,7 @@ class BestBooks::Scraper
     end
   end
   #  returns the first paragraph from the wikipedia page for the book
-  def wiki(book)
+  def self.wiki(book)
     search_string = book.title.split.join('+')
     google_search = open("https://www.google.com/search?q=wikipedia+#{search_string}")
     google_page = Nokogiri::HTML(google_search)
