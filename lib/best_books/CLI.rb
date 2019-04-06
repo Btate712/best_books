@@ -4,7 +4,7 @@ class BestBooks::CLI
     finished = false
     BestBooks::Book.populate_library
 
-    puts "100 Best Books according to https://thegreatestbooks.org/..."
+    welcome_message
 
     until finished
       display_books
@@ -14,6 +14,10 @@ class BestBooks::CLI
       finished = finished?
     end
     goodbye
+  end
+
+  def welcome_message
+    puts "100 Best Books according to https://thegreatestbooks.org/..."
   end
 
   def display_books
@@ -30,7 +34,7 @@ class BestBooks::CLI
     summary = BestBooks::Book.library[book_choice].description
 
     puts "#{book_title}, by #{book_author}"
-    BestBooks::Formatter.display(summary, PAGE_WIDTH)
+    display(summary, PAGE_WIDTH)
   end
 
   def get_user_choice
@@ -48,11 +52,24 @@ class BestBooks::CLI
     puts "Want more info? (y/n)"
     input = gets.strip.downcase
     if input == "y"
-      BestBooks::Book.library[book_choice].show_wikipedia_summary
+      display(BestBooks::Book.library[book_choice].wikipedia_summary, PAGE_WIDTH)
     end
   end
 
   def goodbye
-    puts "Thank you for your patronage!"
+    puts "Thank you for using best_books!"
+  end
+
+  def display(text, width)
+    line_space_left = width
+    text.split.each do |word|
+      if word.length > line_space_left
+        print "\n"
+        line_space_left = width
+      end
+      print word + " "
+      line_space_left -= (word.length + 1)
+    end
+    puts "\n\n"
   end
 end

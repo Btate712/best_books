@@ -15,11 +15,10 @@ class BestBooks::Book
   end
 
   def self.populate_library
-    BestBooks::Scraper.new
+    BestBooks::Scraper.new.scrape_books
   end
 
-  def show_wikipedia_summary
+  def wikipedia_summary
     summary = BestBooks::Scraper.wiki(self)
-    BestBooks::Formatter.display(summary, PAGE_WIDTH)
   end
 end

@@ -1,5 +1,5 @@
 class BestBooks::Scraper
-  def initialize
+  def scrape_books
     html = open('https://thegreatestbooks.org/')
     doc = Nokogiri::HTML(html)
     NUMBER_OF_BOOKS.times do |book|
