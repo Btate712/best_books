@@ -38,8 +38,17 @@ class BestBooks::CLI
   end
 
   def get_user_choice
-    puts "Which book would you like more information on?"
-    gets.strip.to_i - 1
+    isValid = false
+    while !isValid
+      puts "Which book would you like more information on?"
+      choice = gets.strip.to_i
+      if choice >= 1 && choice <= NUMBER_OF_BOOKS
+        isValid = true
+      else
+        puts "Invalid selection..."
+      end
+    end
+    choice
   end
 
   def finished?
