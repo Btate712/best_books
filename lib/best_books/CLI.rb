@@ -17,7 +17,7 @@ class BestBooks::CLI
   end
 
   def welcome_message
-    puts "100 Best Books according to https://thegreatestbooks.org/..."
+    puts "#{NUMBER_OF_BOOKS} Best Books according to https://thegreatestbooks.org/..."
   end
 
   def display_books
