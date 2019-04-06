@@ -19,6 +19,6 @@ class BestBooks::Book
   end
 
   def wikipedia_summary
-    summary = BestBooks::Scraper.new.wiki(self)
+    @summary ||= BestBooks::Scraper.new.wiki(self)
   end
 end
