@@ -7,5 +7,5 @@ require 'nokogiri'
 require 'open-uri'
 require 'pry'
 
-NUMBER_OF_BOOKS = 10
+NUMBER_OF_BOOKS = 15
 PAGE_WIDTH = 100
