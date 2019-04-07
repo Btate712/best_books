@@ -48,7 +48,7 @@ class BestBooks::CLI
         puts "Invalid selection..."
       end
     end
-    choice
+    choice - 1
   end
 
   def finished?
