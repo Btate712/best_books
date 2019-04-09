@@ -1,5 +1,7 @@
 # CLI Controller
 class BestBooks::CLI
+  attr_accessor :current_book
+
   def call
     finished = false
     BestBooks::Book.populate_library
@@ -8,9 +10,9 @@ class BestBooks::CLI
 
     until finished
       display_books
-      book_choice = get_user_choice
-      display_description(book_choice)
-      offer_more_info(book_choice)
+      get_user_choice
+      display_description
+      offer_more_info
       finished = finished?
     end
     goodbye
@@ -21,20 +23,12 @@ class BestBooks::CLI
   end
 
   def display_books
-    NUMBER_OF_BOOKS.times do |book|
-      book_title = BestBooks::Book.library[book].title
-      book_author = BestBooks::Book.library[book].author
-      puts "#{book + 1}: #{book_title}, by #{book_author}"
-    end
+    BestBooks::Book.library.each.with_index(1) { |book, i| puts "#{i}: #{book.title}, by #{book.author}" }
   end
 
-  def display_description(book_choice)
-    book_title = BestBooks::Book.library[book_choice].title
-    book_author = BestBooks::Book.library[book_choice].author
-    summary = BestBooks::Book.library[book_choice].description
-
-    puts "#{book_title}, by #{book_author}"
-    display(summary, PAGE_WIDTH)
+  def display_description
+    puts "#{current_book.title}, by #{current_book.author}"
+    display(current_book.description, PAGE_WIDTH)
   end
 
   def get_user_choice
@@ -42,13 +36,13 @@ class BestBooks::CLI
     while !isValid
       puts "Which book would you like more information on?"
       choice = gets.strip.to_i
-      if choice >= 1 && choice <= NUMBER_OF_BOOKS
+      if choice.between?(1, NUMBER_OF_BOOKS)
         isValid = true
       else
         puts "Invalid selection..."
       end
     end
-    choice - 1
+    self.current_book = BestBooks::Book.library[choice - 1]
   end
 
   def finished?
@@ -57,20 +51,20 @@ class BestBooks::CLI
     response == "y" ? false : true
   end
 
-  def offer_more_info(book_choice)
+  def offer_more_info
     puts "Want more info? (y/n)"
     input = gets.strip.downcase
     if input == "y"
-      display(BestBooks::Book.library[book_choice].wikipedia_summary, PAGE_WIDTH)
+      display(current_book.wikipedia_summary, PAGE_WIDTH)
     end
   end
 
   def goodbye
-    puts "Thank you for using best_books!"
+    puts "Thank you for using BestBooks!"
   end
 
-  def display(text, width)
-    line_space_left = width
+  def display(text, width)    # limits the line length to a number of characters
+    line_space_left = width   # equal to the variable width
     text.split.each do |word|
       if word.length > line_space_left
         print "\n"

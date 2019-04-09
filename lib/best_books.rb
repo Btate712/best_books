@@ -5,6 +5,7 @@ require_relative "./best_books/scraper"
 
 require 'nokogiri'
 require 'open-uri'
+require 'pry'
 
 NUMBER_OF_BOOKS = 10
 PAGE_WIDTH = 100
