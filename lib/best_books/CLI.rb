@@ -6,6 +6,7 @@ class BestBooks::CLI
     finished = false
     BestBooks::Book.populate_library
 
+    clear_screen
     welcome_message
 
     until finished
@@ -18,16 +19,24 @@ class BestBooks::CLI
     goodbye
   end
 
+  def clear_screen
+    system("clear")
+    system("cls")
+  end
+
   def welcome_message
     puts "#{NUMBER_OF_BOOKS} Best Books according to https://thegreatestbooks.org/..."
   end
 
   def display_books
-    BestBooks::Book.library.each.with_index(1) { |book, i| puts "#{i}: #{book.title}, by #{book.author}" }
+    puts "\n"
+    BestBooks::Book.library.each.with_index(1) { |book, i| puts "#{i}: #{book.title}, by #{book.author}:" }
+    puts "\n"
   end
 
   def display_description
-    puts "#{current_book.title}, by #{current_book.author}"
+    clear_screen
+    puts "\n#{current_book.title}, by #{current_book.author}"
     display(current_book.description, PAGE_WIDTH)
   end
 
@@ -48,6 +57,7 @@ class BestBooks::CLI
   def finished?
     puts "Would you like to look at other books? (y/n)"
     response = gets.strip.downcase
+    clear_screen
     response == "y" ? false : true
   end
 
@@ -64,6 +74,7 @@ class BestBooks::CLI
   end
 
   def display(text, width)    # limits the line length to a number of characters
+    puts "\n"
     line_space_left = width   # equal to the variable width
     text.split.each do |word|
       if word.length > line_space_left
